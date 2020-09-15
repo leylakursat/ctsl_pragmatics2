@@ -83,7 +83,13 @@ function make_slides(f) {
 	    this.stim = stim;
 	    console.log(this.stim);
       //var contextsentence = "Which description of this object sounds more natural?";
-      var sentence = "Mary: That " + this.stim.object + " is " + this.stim.adj + "." + "<br>" +"Bob: That " + this.stim.object + " is not " + this.stim.adj + ".";
+
+      var obj = this.stim.object
+
+      if (obj[obj.length-1] == "s") 
+        var sentence = "Mary: Those " + this.stim.object + " are " + this.stim.adj + "." + "<br>" +"Bob: Those " + this.stim.object + " are not " + this.stim.adj + ".";
+      else
+        var sentence = "Mary: That " + this.stim.object + " is " + this.stim.adj + "." + "<br>" +"Bob: That " + this.stim.object + " is not " + this.stim.adj + ".";
 
       //var adjective = "<big><b>"+this.stim.adj+ "</b></big>";
       //var adjquestion = 'How subjective is the adjective "' + this.stim.adj + '"?'
@@ -148,7 +154,7 @@ function make_slides(f) {
           "subject_information" : exp.subj_data,
           "time_in_minutes" : (Date.now() - exp.startT)/60000
       };
-      setTimeout(function() {turk.submit(exp.data);}, 1000);
+      setTimeout(function() {proliferate.submit(exp.data);}, 1000);
     }
   });
 

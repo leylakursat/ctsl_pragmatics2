@@ -30,29 +30,9 @@ exp.items = _.shuffle([
         "adj": "cardboard",
     },
     {
-        "label": "box_closed_wood",
-        "object": "box",
-        "adj": "wood",
-    },
-    {
         "label": "box_open_cardboard",
         "object": "box",
         "adj": "open",
-    },
-    {
-        "label": "cup_empty_metal",
-        "object": "cup",
-        "adj": "empty",
-    },
-    {
-        "label": "cup_empty_metal",
-        "object": "cup",
-        "adj": "metal",
-    },
-    {
-        "label": "cup_full_metal",
-        "object": "cup",
-        "adj": "full",
     },
     {
         "label": "earring_big_round",
@@ -85,14 +65,14 @@ exp.items = _.shuffle([
         "adj": "striped",
     },
     {
-        "label": "hair_curly_blond",
+        "label": "hair_curly_blonde",
         "object": "hair",
         "adj": "curly",
     },
     {
-        "label": "hair_curly_blond",
+        "label": "hair_curly_blonde",
         "object": "hair",
-        "adj": "blonde",
+        "adj": "blond",
     },
     {
         "label": "hair_curly_brown",
@@ -103,11 +83,6 @@ exp.items = _.shuffle([
         "label": "hair_straight_blond",
         "object": "hair",
         "adj": "straight",
-    },
-    {
-        "label": "hair_straight_blond",
-        "object": "hair",
-        "adj": "blond",
     },
     {
         "label": "man_old_bearded",
@@ -122,7 +97,7 @@ exp.items = _.shuffle([
     {
         "label": "man_old_cleanshaven",
         "object": "man",
-        "adj": "cleanshaven",
+        "adj": "clean-shaven",
     },
     {
         "label": "man_young_bearded",
@@ -131,18 +106,18 @@ exp.items = _.shuffle([
     },
     {
         "label": "man2_bearded_glassed",
-        "object": "man2",
-        "adj": "glassed",
+        "object": "man",
+        "adj": "glasses-wearing",
     },
     {
         "label": "man2_bearded_hatted",
-        "object": "man2",
-        "adj": "hatted",
+        "object": "man",
+        "adj": "hat-wearing",
     },
     {
         "label": "man2_mustached_glassed",
-        "object": "man2",
-        "adj": "mustached",
+        "object": "man",
+        "adj": "mustache-touting",
     },
     {
         "label": "nails_black_glossy",
@@ -177,7 +152,7 @@ exp.items = _.shuffle([
     {
         "label": "picture_bw_rectangular",
         "object": "picture",
-        "adj": "bw",
+        "adj": "black and white",
     },
     {
         "label": "picture_bw_rectangular",
@@ -203,6 +178,11 @@ exp.items = _.shuffle([
         "label": "shorts_wet_green",
         "object": "shorts",
         "adj": "wet",
+    },
+    {
+        "label": "spoon_metal_clean",
+        "object": "spoon",
+        "adj": "metal",
     },
     {
         "label": "spoon_metal_clean",
@@ -241,14 +221,12 @@ exp.items = _.shuffle([
     },
     {
         "label": "woman2_happy_fat",
-        "object": "woman2",
+        "object": "woman",
         "adj": "fat",
     },
     {
         "label": "woman2_happy_skinny",
-        "object": "woman2",
+        "object": "woman",
         "adj": "skinny",
     },
-    
-
 ]);
