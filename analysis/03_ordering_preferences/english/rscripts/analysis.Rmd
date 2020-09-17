@@ -1,0 +1,95 @@
+---
+title: "Pragmatics in CTSL - Ordering Preferences (ENGLISH)"
+#output: rmarkdown::github_document
+output:
+  html_document: default
+  #pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r data import, include=FALSE}
+library(tidyverse)
+library(wesanderson)
+library(ggpubr)
+source("helpers.R")
+theme_set(theme_bw())
+palette = wes_palette("Zissou1")
+
+# load data and format
+df = read.csv("../data/ordering-trials.csv", header = TRUE) %>%
+  filter(utterance != "bot_check" )
+
+df$response = gsub("\\[","",df$response)
+df$response = gsub("\\]","",df$response)
+df$response = as.numeric(df$response)
+df$left_end = gsub('"',"",df$left_end)
+df$right_end = gsub('"',"",df$right_end)
+```
+
+```{r data wrangling, include=FALSE}
+# averaging ratings of configurations in which an adj appeared in first position (farther from the noun) --> greater values signal that a class’s adjectives are preferred in first position, farther from the noun
+
+# group by first position adjectives on one end (right) -- higher the mean, the more preferred they are in first position
+df = df %>%
+  mutate(right_end = str_replace(right_end,"black and white","black-and-white")) %>%
+  mutate(left_end = str_replace(left_end,"black and white","black-and-white")) %>%
+  mutate(first_pos = word(right_end, 1)) %>%
+  mutate(second_pos = word(right_end, 2))
+```
+
+```{r preferenece, include=FALSE}
+d = df %>%
+  group_by(first_pos) %>%
+  summarise(Mean=mean(response),CILow=ci.low(response),CIHigh=ci.high(response),count=n()) %>%
+  ungroup() %>%
+  mutate(YMin=Mean-CILow,YMax=Mean+CIHigh) 
+
+ggplot(d,(aes(x=reorder(first_pos, -Mean),y=Mean))) +
+  geom_bar(stat = "identity") +
+  geom_errorbar(aes(ymin = YMin, ymax = YMax),width=.25) +
+  theme(axis.text.x = element_text(angle = 60, hjust=1)) +
+  xlab("adjectives") +
+  ylab("mean rating in 1st position")
+
+# more subjective adjectives are preferred farther from the noun
+ggsave(file="../graphs/adj_first_pos.pdf",width=8,height=4)
+```
+
+```{r subjectivity, include=FALSE}
+# load subjectivity and faultless disagreement agv dataset
+load("../../../04_subjectivity/english/data/subjectivity_and_disagreement.Rda")
+subjectivity = d_wide
+
+# merge and format
+dt = merge(subjectivity,d, by.x = c("adj"), by.y = c("first_pos"),)
+dt = dt %>% mutate(naturalness=Mean) %>% select(adj,naturalness,subjectivity,disagreement)
+
+ggscatter(dt, x = "subjectivity", y = "naturalness", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "subjectivity", ylab = "naturalness", 
+          label = "adj",font.label = c(8, "plain"))
+
+#label.select = list(criteria = "`x` > 4 & `y` < 15"))
+ggsave(file="../graphs/subjectivity-naturalness_labeled.pdf")
+
+ggscatter(dt, x = "disagreement", y = "naturalness", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "faultless", ylab = "naturalness")
+ggsave(file="../graphs/disagreement-naturalness.pdf")
+
+```
+
+
+
+
+
+
+
+
+
+

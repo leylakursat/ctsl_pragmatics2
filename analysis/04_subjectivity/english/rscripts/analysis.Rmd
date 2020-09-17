@@ -1,0 +1,75 @@
+---
+title: "Pragmatics in CTSL - Subjectivity (ENGLISH)"
+#output: rmarkdown::github_document
+output:
+  html_document: default
+  #pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r data import, include=FALSE}
+library(tidyverse)
+library(wesanderson)
+library(ggpubr)
+source("helpers.R")
+theme_set(theme_bw())
+palette = wes_palette("Zissou1")
+
+# load datasets
+subjectivity = read.csv("../data/subjectivity-trials.csv", header = TRUE) %>%
+  filter(utterance != "bot_check" ) %>%
+  mutate(experiment = "subjectivity")
+
+disagreement = read.csv("../../../05_faultless_disagreement/english/data/disagreement-trials.csv", header = TRUE) %>%
+  filter(utterance != "bot_check" ) %>%
+  mutate(experiment = "disagreement")
+
+# merge and format
+df = rbind(subjectivity,disagreement)
+df$response = gsub("\\[","",df$response)
+df$response = gsub("\\]","",df$response)
+df$response = as.numeric(df$response)
+```
+
+```{r formatting, include=FALSE}
+d = df %>%
+  group_by(adj,experiment) %>%
+  summarise(Mean=mean(response),CILow=ci.low(response),CIHigh=ci.high(response)) %>%
+  ungroup() %>%
+  mutate(YMin=Mean-CILow,YMax=Mean+CIHigh) 
+
+ggplot(d,(aes(x=reorder(adj, -Mean),y=Mean,color=experiment))) +
+  geom_point()+
+    geom_errorbar(aes(ymin = YMin, ymax = YMax),width=.25) +
+    theme(axis.text.x = element_text(angle = 60, hjust=1)) +
+    scale_color_manual(values=c(palette[1],palette[5])) +
+    xlab("adjectives") +
+    ylab("mean subjectivity score")
+
+ggsave(file="../graphs/subjectivity_disagreement.pdf",width=8,height=4)
+```
+
+```{r correlation, include=FALSE}
+# correlation test 
+d_wide = d %>%
+  select(adj,experiment,Mean) %>%
+  spread(experiment,Mean)
+
+save(d_wide,file="../data/subjectivity_and_disagreement.Rda")
+
+ggscatter(d_wide, x = "subjectivity", y = "disagreement", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "subjectivity", ylab = "faultless disagreement")
+
+cor.test(d_wide$subjectivity, d_wide$disagreement, method = "pearson") # r = 0.89, 95% CI = [0.81, 0.94]
+
+# from paper: The results of this method were highly correlated with our direct “subjectivity” scores (r2 = 0.91, 95% CI [0.86, 0.94]), suggesting that they measure a common underlying value: adjective subjectivity
+```
+
+
+
+
