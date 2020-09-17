@@ -1,8 +1,8 @@
 ---
 title: "Pragmatics in CTSL - Ordering Preferences (ENGLISH)"
-#output: rmarkdown::github_document
-output:
-  html_document: default
+output: rmarkdown::github_document
+#output:
+  #html_document: default
   #pdf_document: default
 ---
 
@@ -40,7 +40,7 @@ df = df %>%
   mutate(second_pos = word(right_end, 2))
 ```
 
-```{r preferenece, include=FALSE}
+```{r preferenece, echo=FALSE}
 d = df %>%
   group_by(first_pos) %>%
   summarise(Mean=mean(response),CILow=ci.low(response),CIHigh=ci.high(response),count=n()) %>%
@@ -58,7 +58,7 @@ ggplot(d,(aes(x=reorder(first_pos, -Mean),y=Mean))) +
 ggsave(file="../graphs/adj_first_pos.pdf",width=8,height=4)
 ```
 
-```{r subjectivity, include=FALSE}
+```{r subjectivity, echo=FALSE}
 # load subjectivity and faultless disagreement agv dataset
 load("../../../04_subjectivity/english/data/subjectivity_and_disagreement.Rda")
 subjectivity = d_wide
