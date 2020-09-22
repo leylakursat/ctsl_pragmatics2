@@ -29,6 +29,8 @@ disagreement = read.csv("../../../05_faultless_disagreement/english/data/disagre
 
 # merge and format
 df = rbind(subjectivity,disagreement)
+df$adj = as.character(df$adj)
+df = df%>% mutate(adj = ifelse(adj=="black and white","black-and-white",adj))
 df$response = gsub("\\[","",df$response)
 df$response = gsub("\\]","",df$response)
 df$response = as.numeric(df$response)
@@ -37,7 +39,7 @@ df$response = as.numeric(df$response)
 ```{r formatting, echo=FALSE}
 d = df %>%
   group_by(adj,experiment) %>%
-  summarise(Mean=mean(response),CILow=ci.low(response),CIHigh=ci.high(response)) %>%
+  summarise(Mean=mean(response),CILow=ci.low(response),CIHigh=ci.high(response), count=n()) %>%
   ungroup() %>%
   mutate(YMin=Mean-CILow,YMax=Mean+CIHigh) 
 
@@ -49,7 +51,7 @@ ggplot(d,(aes(x=reorder(adj, -Mean),y=Mean,color=experiment))) +
     xlab("adjectives") +
     ylab("mean subjectivity score")
 
-#ggsave(file="../graphs/subjectivity_disagreement.pdf",width=8,height=4)
+ggsave(file="../graphs/subjectivity_disagreement.pdf",width=8,height=4)
 ```
 
 ```{r correlation, echo=FALSE}
@@ -58,7 +60,7 @@ d_wide = d %>%
   select(adj,experiment,Mean) %>%
   spread(experiment,Mean)
 
-#save(d_wide,file="../data/subjectivity_and_disagreement.Rda")
+save(d_wide,file="../data/subjectivity_and_disagreement.Rda")
 
 ggscatter(d_wide, x = "subjectivity", y = "disagreement", 
           add = "reg.line", conf.int = TRUE, 

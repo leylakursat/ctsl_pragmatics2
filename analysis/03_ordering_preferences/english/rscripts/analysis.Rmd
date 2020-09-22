@@ -81,10 +81,33 @@ ggscatter(dt, x = "disagreement", y = "naturalness",
           cor.coef = TRUE, cor.method = "pearson",
           xlab = "faultless", ylab = "naturalness")
 ggsave(file="../graphs/disagreement-naturalness.pdf")
-
 ```
 
+```{r subjectivity_score, echo=FALSE}
+dd = df %>%
+  group_by(label,adj1,adj2,object,first_pos) %>%
+  summarise(Mean=mean(response)) %>%
+  mutate(second_pos = ifelse(first_pos==as.character(adj1),as.character(adj2),ifelse(first_pos==as.character(adj2),as.character(adj1),NA))) %>%
+  mutate(order=paste(first_pos,second_pos,object,sep = " "))
 
+m = merge(dd, subjectivity, by.x = c("first_pos"), by.y = c("adj"), all.x=TRUE, all.y=FALSE)
+m = merge(m, subjectivity, by.x = c("second_pos"), by.y = c("adj"),all.x = TRUE,all.y = FALSE)
+
+dm = m %>% 
+  rename(c("first_pos_subjectivity"="subjectivity.x","second_pos_subjectivity"="subjectivity.y")) %>%
+  mutate(subjectivity_diff = first_pos_subjectivity-second_pos_subjectivity)
+
+ggplot(dm,(aes(x=subjectivity_diff,y=Mean,color=object))) +
+    geom_point(size=2)+
+    theme(axis.text.x = element_text(angle = 60, hjust=1)) +
+    geom_text(size=1.7,aes(label=order),hjust=0, vjust=0) +
+    xlab("subjectivity difference") +
+    ylab("mean naturalness score") +
+    theme(legend.position = "none")
+
+ggsave(file="../graphs/subjectivity-difference.pdf")
+  
+```
 
 
 
