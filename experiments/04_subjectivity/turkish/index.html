@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+<html>
 
 <head>
-    <title>Subjectivity</title>
+    <title>Öznellik</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <!--JS-->
 
@@ -34,6 +35,10 @@
 
     <!-- experiment file -->
     <script src="js/index.js"></script>
+    <script src="js/stimuli.js"></script>
+
+    <!-- proliferate -->
+    <script src="https://proliferate.alps.science/static/js/proliferate.js" type="text/javascript"></script>
 
     <script type="text/JavaScript">
       $(document).ready(function(){
@@ -50,28 +55,29 @@
   <noscript>This task requires JavaScript.</noscript>
 
   <div class="slide" id="bot" >
-    <h3>Are you a bot?</h3>
+    <h3>Bot Testi</h3>
     <p id="s"></p>
     <p id="q"></p>
     <input type="text" id="text_box"/></question>
     <br><br><br>
       <div class="err1">
-        <p2>Failing this question two more times will disqualify you from this study.</p2></div>
+        <p2>İki hakkınız kaldı.</p2></div>
       <div class="err2">
-        <p2>Failing this question one more time will disqualify you from this study.</p2></div>
+        <p2>Bir hakkınız kaldı.</p2></div>
       <div class="disq">
-        <p2>You failed the question and you are disqualified.</p2></div>
+        <p2>Elendiniz.</p2></div>
       <div class="button">
-        <button onclick="_s.button()">Continue</button></div>
+        <button onclick="_s.button()">Devam</button></div>
   </div>
 
   <div class="slide" id="i0" >
     <img src="shared/images/alpslogo.png" alt="Stanford ALPS Lab" style="width:400;">
-    <p id="instruct-text">Farkli sifatlar goreceksiniz. Goreviniz bu sifatlarin ne kadar oznel oldugunu belirtmek. Bu HIT yaklasik 10 dakika surecek. Lutfen dikkatle cevap verin.</p>
-    <button id="start_button" type="button">Start Experiment</button>
-    <p id="instruct-text" align="left"><i><small><small><small><strong><br>LEGAL INFORMATION</strong>:<br>We invite you to participate in a research study on language production and comprehension.<br>Your experimenter will ask you to do a linguistic task such as reading sentences or words, naming pictures or describing scenes, making up sentences of your own, or participating in a simple language game.<br>You will be paid for your participation at the posted rate.<br>There are no risks or benefits of any kind involved in this study.<br>If you have read this form and have decided to participate in this experiment, please understand your participation is voluntary and you have the right to withdraw your consent or discontinue participation at any time without penalty or loss of benefits to which you are otherwise entitled. You have the right to refuse to do particular tasks. Your individual privacy will be maintained in all published and written data resulting from the study.<br>You may print this form for your records.<br>CONTACT INFORMATION:<br>If you have any questions, concerns or complaints about this research study, its procedures, risks and benefits, you should contact the Protocol Director Meghan Sumner at <br>(650)-725-9336<br>If you are not satisfied with how this study is being conducted, or if you have any concerns, complaints, or general questions about the research or your rights as a participant, please contact the Stanford Institutional Review Board (IRB) to speak to someone independent of the research team at (650)-723-2480 or toll free at 1-866-680-2906. You can also write to the Stanford IRB, Stanford University, 3000 El Camino Real, Five Palo Alto Square, 4th Floor, Palo Alto, CA 94306 USA.<br>If you agree to participate, please proceed to the study tasks.<br><br></small></small></small></i></p>
+    <p id="instruct-text">Bazı sıfatlar göreceksiniz. Göreviniz bu sıfatların ne kadar öznel olduğunu belirtmek. Bu deney yaklaşık 5 dakika sürecek. Lütfen sorulara dikkatle cevap verin.</p>
+    <button id="start_button" type="button">Deneyi başlat</button>
+    <!-- <p id="instruct-text" align="left"><i><small><small><small><strong><br>LEGAL INFORMATION</strong>:<br>We invite you to participate in a research study on language production and comprehension.<br>Your experimenter will ask you to do a linguistic task such as reading sentences or words, naming pictures or describing scenes, making up sentences of your own, or participating in a simple language game.<br>You will be paid for your participation at the posted rate.<br>There are no risks or benefits of any kind involved in this study.<br>If you have read this form and have decided to participate in this experiment, please understand your participation is voluntary and you have the right to withdraw your consent or discontinue participation at any time without penalty or loss of benefits to which you are otherwise entitled. You have the right to refuse to do particular tasks. Your individual privacy will be maintained in all published and written data resulting from the study.<br>You may print this form for your records.<br>CONTACT INFORMATION:<br>If you have any questions, concerns or complaints about this research study, its procedures, risks and benefits, you should contact the Protocol Director Meghan Sumner at <br>(650)-725-9336<br>If you are not satisfied with how this study is being conducted, or if you have any concerns, complaints, or general questions about the research or your rights as a participant, please contact the Stanford Institutional Review Board (IRB) to speak to someone independent of the research team at (650)-723-2480 or toll free at 1-866-680-2906. You can also write to the Stanford IRB, Stanford University, 3000 El Camino Real, Five Palo Alto Square, 4th Floor, Palo Alto, CA 94306 USA.<br>If you agree to participate, please proceed to the study tasks.<br><br></small></small></small></i></p> -->
+    <p id="instruct-text" align="left"><i><small><small><small><strong><br>DENEY PROSEDÜRÜ</strong>:<br>Sizi dilin kullanımı ve kavranması hakkındaki bilimsel araştırmamıza katılmaya davet ediyoruz.<br>Araştırma görevlisi sizden belirli cümleleri veya kelimeleri okumak, resimlerde gördüklerinizi tarif etmek, cümleler kurmak ve basit kelime oyunları oynamak gibi dil odaklı birtakım şeyler yapmanızı isteyecektir.<br>Katılımınız için size deney platformunda belirtilen miktarda ödeme yapılacaktır.<br>Bu deney hiçbir risk taşımamaktadır.<br>Eğer bu formu okuyup kendi iradenizle araştırmamıza katılmaya karar verirseniz, bilin ki katılımınız tamamen sizin isteğinize bağlıdır. İstediğiniz zaman halihazırda sahip olduğunuz haklarınızdan mahrum edilmeden ve herhangi bir kayıp yaşamadan katılımınıza son verebilirsiniz. Belli başlı görevlere katılmayı reddetme hakkına sahipsiniz. <br>Bu çalışmadan elde edilen bütün yayın ve sonuçlarda gizliliğiniz sağlanacaktır. Kendi kayıtlarınız için bu sayfanın bir nüshasını yazdırabilirsiniz.<br>İLETİŞİM BİLGİLERİ<br>Bu çalışma, çalışmanın prosedürü, riskleri ve faydaları hakkında herhangi soru, kaygı ve şikayetiniz varsa, +1(650)-725-9336 numaralı hattan Protokol Direktörlerinden Meghan Sumner ile iletişime geçebilirsiniz.<br>Eğer bu çalışmanın yürütülüş biçiminden hoşnut değilseniz, bir katılımcı olarak haklarınız hakkında kaygılarınız, şikayetleriniz, veya sorularınız varsa, araştırma takımından bağımsız bir yetkiliyle görüşmek için lütfen “Stanford Kurumsal İnceleme Kurulu” (IRB) ile +1(650)-723-2480'den veya +1(866)-680-2906 numaralı ücretsiz hattan irtibata geçiniz. Aynı şekilde, Stanford Kurumsal İnceleme Kurulu ile aşağıda belirtilen posta adresi aracılığıyla iletişime geçebilirsiniz: Stanford IRB, Stanford University, 3000 El Camino Real, Five Palo Alto Square, 4th Floor, Palo Alto, CA 94306 USA.<br>Eğer bu deneye katılmak istiyorsanız, lütfen bir sonraki sayfaya devam edin.<br><br></small></small></small></i></p>
   </div>
-
+  
   <!-- <div class="slide" id="instructions">
     <h3>Instructions</h3>
     <p>In this experiment you will read 6 descriptions of events. In
@@ -85,71 +91,86 @@
     <div id="objectimage"></div>
     <p id="contextsentence"></p>
     <p id="adjective"></p>
-    <table id="slider_table" class="slider_table">
-      <tr><td class="left">tamamen nesnel</td><td class="right" id="numObjects">tamamen oznel</td></tr>
+    <p id="adjquestion"></p>
+
+    <!-- <table id="slider_table" class="slider_table">
+      <tr><td class="left">fully objective</td><td class="right" id="numObjects">fully subjective</td></tr>
       <tr><td colspan="6"><div id="single_slider" class="slider"></div></td></tr>
-    </table>
+    </table> -->
+
+    <table id="multi_slider_table" class="slider_table">
+      <tr><td><span class="left">tamamen nesnel</span></td><td>
+      <div id="single_slider" class="slider"></div>
+      </td><td><span class="right">tamamen öznel</p></span></td></tr>
+  </table>
+
     <br>
-    <button id="continue" onclick="_s.button()">Continue</button>
-    <br>
-    <div class="err" style="display:none">Please answer before clicking continue.</div>
+    <button id="continue" onclick="_s.button()">Devam</button>
+    <br><br>
+    <div class="err" style="display:none">Lütfen ortadaki kareyi kaydırarak bir seçim yapın.</div>
   </div>
 
   <div class="slide"  id="subj_info">
     <div class="long_form">
-      <div class="subj_info_title">Additional information</div>
-      <p class="info">Answering these questions is optional, but will help us understand your answers.</p>
-      <p>Did you read the instructions and do you think you did the HIT correctly?</p>
-      <label><input type="radio"  name="assess" value="No"/>No</label>
-      <label><input type="radio"  name="assess" value="Yes"/>Yes</label>
-      <label><input type="radio"  name="assess" value="Confused"/>I was confused</label>
+      <div class="subj_info_title">Ek Bilgi</div>
+      <p class="info">Bu sorulara cevap vermek zorunda degilsiniz, ama verirseniz deneyde verdiğiniz cevapları daha iyi anlayabiliriz.</p>
+      <p>Talimatları okudunuz ve soruları doğru bir şekilde cevapladınız mi?</p>
+      <label><input type="radio"  name="assess" value="No"/>Hayır</label>
+      <label><input type="radio"  name="assess" value="Yes"/>Evet</label>
+      <label><input type="radio"  name="assess" value="Confused"/>Kafam karıştı</label>
 
-      <p>Gender:
+      <p>Deneyde bir sorun ya da teknik bir aksaklık oldu mu?</p>
+      <textarea id="problems" rows="2" cols="50"></textarea>
+
+      <p>Sizce yaptığınız görev için uygun ücret ne olmalıdır?</p>
+      <textarea id="fairprice" rows="1" cols="10"></textarea>
+
+      <p>Cinsiyet:
         <select id="gender">
           <label><option value=""/></label>
-          <label><option value="Male"/>Male</label>
-          <label><option value="Female"/>Female</label>
-          <label><option value="Other"/>Other</label>
+          <label><option value="Male"/>Erkek</label>
+          <label><option value="Female"/>Kadın</label>
+          <label><option value="Other"/>Diğer</label>
         </select>
       </p>
 
-      <p>Age: <input type="text" id="age"/></p>
+      <p>Yaş: <input type="text" id="age"/></p>
 
-      <p>Level Of Education:
+      <p>Eğitim seviyesi:
         <select id="education">
           <label><option value="-1"/></label>
-          <label><option value="0"/>Some High School</label>
-          <label><option value="1"/>Graduated High School</label>
-          <label><option value="2"/>Some College</label>
-          <label><option value="3"/>Graduated College</label>
-          <label><option value="4"/>Hold a higher degree</label>
+          <label><option value="0"/>Lise Terk</label>
+          <label><option value="1"/>Lise Mezunu</label>
+          <label><option value="2"/>Üniversite Terk</label>
+          <label><option value="3"/>Üniversite Mezunu</label>
+          <label><option value="4"/>Lisansüstü</label>
         </select>
       </p>
 
-      <p>Native Language: <input type="text" id="language"/></p>
-      <label>(the language(s) spoken at home when you were a child)</label>
+      <p>Anadil: <input type="text" id="language"/></p>
+      <label>(çocukken evde konuşulan dil(ler))</label>
 
-      <p>Did you enjoy the hit?</p>
+      <p>Bu deneyi nasil buldunuz?</p>
       <select id="enjoyment">
         <label><option value="-1"></option></label>
-        <label><option value="0">Worse than the Average HIT</option></label>
-        <label><option value="1" >An Average HIT</option></label>
-        <label><option value="2">Better than average HIT</option></label>
+        <label><option value="0">Ortalama bir deneyden daha kötü</option></label>
+        <label><option value="1" >Ortalama bir deney</option></label>
+        <label><option value="2">Ortalama bir deneyden daha iyi</option></label>
       </select>
 
-      <p>We would be interested in any comments you have about this experiment. Please type them here:</p>
+      <p>Bu deney ile ilgili yorumlarınızı merak ediyoruz. Buraya yazabilirsiniz:</p>
       <textarea id="comments" rows="3" cols="50"></textarea>
       <br/>
-      <button onclick="_s.submit()">Submit</button>
+      <button onclick="_s.submit()">Gönder</button>
     </div>
   </div>
 
   <div id="thanks" class="slide js" >
-    <p  class="big">Thanks for your Time!</p>
+    <p  class="big">Zaman ayırdığınız için teşekkürler.</p>
   </div>
 
   <div class="progress">
-    <span>Progress:</span>
+    <span>İlerleme:</span>
     <div class="bar-wrapper">
       <div class="bar" width="0%">
       </div>

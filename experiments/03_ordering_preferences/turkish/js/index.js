@@ -2,54 +2,58 @@ function make_slides(f) {
   var slides = {};
 
   slides.bot = slide({
-    name : "bot",
-    start: function() {
+    name: "bot",
+    start: function () {
       $('.err1').hide();
       $('.err2').hide();
       $('.disq').hide();
-      exp.speaker = _.shuffle(["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Charles"])[0];
-      exp.listener = _.shuffle(["Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Margaret"])[0];
+      //exp.speaker = _.shuffle(["Ali", "Mehmet", "Onur", "Berke", "Efe", "Cem", "Can", "Burak", "Mustafa", "Mert"])[0];
+      //exp.listener = _.shuffle(["Selin", "Zeynep", "Deniz", "Melis", "Yasemin", "Belgin", "Ceren"])[0];
+
+      exp.listener = "beyaz";
       exp.lives = 0;
-      var story = exp.speaker + ' says to ' + exp.listener + ': "It\'s a beautiful day, isn\'t it?"'
-      var question = 'Who does ' + exp.speaker + ' talk to?';
-      document.getElementById("s").innerHTML = story;
+
+      //var story = exp.speaker + ', ' + exp.listener + "'e " + '"Bugün hava çok güzel, değil mi?" diyor.'
+      var question = "Ayran ne renktir?";
+      //document.getElementById("s").innerHTML = story;
       document.getElementById("q").innerHTML = question;
     },
-    button : function() {
+    button: function () {
       exp.text_input = document.getElementById("text_box").value;
-      var lower = exp.listener.toLowerCase();
-      var upper = exp.listener.toUpperCase();
+      var lower = exp.text_input.toLowerCase();
 
-      if ((exp.lives < 3) && ((exp.text_input == exp.listener)|(exp.text_input == lower) | (exp.text_input== upper))){
+      if ((exp.lives < 3) && (lower == exp.listener)) {
         exp.data_trials.push({
-          "slide_number_in_experiment" : exp.phase,
-          "utterance": "bot_check",
+          "slide_number_in_experiment": exp.phase,
+          "trial_type": "bot_check",
+          "label": "",
           "object": exp.listener,
-          "rt" : 0,
-          "response" : exp.text_input
+          "rt": 0,
+          "response": exp.text_input
         });
         exp.go();
       }
       else {
         exp.data_trials.push({
-          "slide_number_in_experiment" : exp.phase,
-          "utterance": "bot_check",
+          "slide_number_in_experiment": exp.phase,
+          "trial_type": "bot_check",
+          "label": "",
           "object": exp.listener,
-          "rt" : 0,
-          "response" : exp.text_input
+          "rt": 0,
+          "response": exp.text_input
         });
-        if (exp.lives == 0){
+        if (exp.lives == 0) {
           $('.err1').show();
-        }if (exp.lives == 1){
+        } if (exp.lives == 1) {
           $('.err1').hide();
           $('.err2').show();
-        }if (exp.lives == 2){
+        } if (exp.lives == 2) {
           $('.err2').hide();
           $('.disq').show();
           $('.button').hide();
         }
         exp.lives++;
-      } 
+      }
     },
   });
 
@@ -82,23 +86,26 @@ function make_slides(f) {
 
 	    this.stim = stim;
 	    console.log(this.stim);
-      //var contextsentence = "Which description of this object sounds more natural?";
-      var contextsentence = "Yukaridaki gorselle ilgili hangi aciklama daha dogal duyuluyor?";
-      var objimagehtml = '<img src="images/'+stim.label+'.png" style="height:330px;">';
+      //var contextsentence = "Which description of the " + this.stim.object +  " sounds more natural?";
+      var contextsentence = this.stim.object_tr.charAt(0).toUpperCase() + this.stim.object_tr.slice(1) + " ile ilgili hangi tanım daha doğal duyuluyor?";
 
       var num = Math.floor(Math.random() * 10); 
       if (num % 2 === 0) {
-        exp.right_end = '"' + this.stim.adj1 + " " + this.stim.adj2 + " " + this.stim.item + '"'
-        exp.left_end = '"' + this.stim.adj2 + " " + this.stim.adj1 + " " + this.stim.item + '"'
+        exp.right_end_tr = '"' + this.stim.adj1_tr + " " + this.stim.adj2_tr + " " + this.stim.object_tr + '"'
+        exp.left_end_tr = '"' + this.stim.adj2_tr + " " + this.stim.adj1_tr + " " + this.stim.object_tr + '"'
+        exp.right_end = '"' + this.stim.adj1 + " " + this.stim.adj2 + " " + this.stim.object + '"'
+        exp.left_end = '"' + this.stim.adj2 + " " + this.stim.adj1 + " " + this.stim.object + '"'
       } else {
-        exp.right_end = '"' + this.stim.adj2 + " " + this.stim.adj1 + " " + this.stim.item + '"'
-        exp.left_end = '"' + this.stim.adj1 + " " + this.stim.adj2 + " " + this.stim.item + '"'
+        exp.right_end_tr = '"' + this.stim.adj2_tr + " " + this.stim.adj1_tr + " " + this.stim.object_tr + '"'
+        exp.left_end_tr = '"' + this.stim.adj1_tr + " " + this.stim.adj2_tr + " " + this.stim.object_tr + '"'
+        exp.right_end = '"' + this.stim.adj2 + " " + this.stim.adj1 + " " + this.stim.object + '"'
+        exp.left_end = '"' + this.stim.adj1 + " " + this.stim.adj2 + " " + this.stim.object + '"'
       }
 
-	    $("#contextsentence").html(contextsentence);
-      $("#objectimage").html(objimagehtml);
-      $("#left_end").html(exp.left_end);
-      $("#right_end").html(exp.right_end);
+      $("#contextsentence").html(contextsentence);
+      //$("#objectimage").html(objimagehtml);
+      $("#left_end").html(exp.left_end_tr);
+      $("#right_end").html(exp.right_end_tr);
 	},
 
     button : function() {
@@ -121,11 +128,13 @@ function make_slides(f) {
         exp.data_trials.push({
           "slide_number_in_experiment" : exp.phase,
           "label": this.stim.label,
-          "item": this.stim.item,
+          "object": this.stim.object,
           "adj1": this.stim.adj1,
           "adj2" : this.stim.adj2,
           "right_end" : exp.right_end,
           "left_end" : exp.left_end,
+          "right_end_tr" : exp.right_end_tr,
+          "left_end_tr" : exp.left_end_tr,
           "rt" : Date.now() - _s.trial_start,
           "response" : [exp.sliderPost]
         });
@@ -160,7 +169,7 @@ function make_slides(f) {
           "subject_information" : exp.subj_data,
           "time_in_minutes" : (Date.now() - exp.startT)/60000
       };
-      setTimeout(function() {turk.submit(exp.data);}, 1000);
+      setTimeout(function() {proliferate.submit(exp.data);}, 1000);
     }
   });
 
@@ -168,143 +177,7 @@ function make_slides(f) {
 }
 
 /// init ///
-function init() {
-  exp.items = _.shuffle([    
-    {
-      "label": "box_cardboard_one",
-      "item": "kutu",
-      "adj1": "karton",
-      "adj2": "bir",
-    },
-    {
-      "label": "box_cardboard_two",
-      "item": "kutu",
-      "adj1": "karton",
-      "adj2": "iki",
-    },
-    {
-      "label": "box_wood_one",
-      "item": "kutu",
-      "adj1": "tahta",
-      "adj2": "bir",
-    },
-    {
-      "label": "box_wood_two",
-      "item": "kutu",
-      "adj1": "tahta",
-      "adj2": "iki",
-    },
-    {
-      "label": "hair_blond_curly",
-      "item": "sac",
-      "adj1": "sari",
-      "adj2": "kivircik",
-    },
-    {
-      "label": "hair_blond_straight",
-      "item": "sac",
-      "adj1": "sari",
-      "adj2": "duz",
-    },
-    {
-      "label": "hair_brown_curly",
-      "item": "sac",
-      "adj1": "kahverengi",
-      "adj2": "kivircik",
-    },
-    {
-      "label": "hair_brown_straight",
-      "item": "sac",
-      "adj1": "kahverengi",
-      "adj2": "duz",
-    },
-    {
-      "label": "pencil_long_black",
-      "item": "kalem",
-      "adj1": "uzun",
-      "adj2": "siyah",
-    },
-    {
-      "label": "pencil_long_blue",
-      "item": "kalem",
-      "adj1": "uzun",
-      "adj2": "mavi",
-    },
-    {
-      "label": "pencil_short_black",
-      "item": "kalem",
-      "adj1": "kisa",
-      "adj2": "siyah",
-    },
-    {
-      "label": "pencil_short_blue",
-      "item": "kalem",
-      "adj1": "kisa",
-      "adj2": "mavi",
-    },
-    {
-      "label": "picture_bw_rectangular",
-      "item": "resim",
-      "adj1": "siyah-beyaz",
-      "adj2": "dikdortgen",
-    },
-    {
-      "label": "picture_bw_square",
-      "item": "resim",
-      "adj1": "siyah-beyaz",
-      "adj2": "kare",
-    },
-    {
-      "label": "picture_colored_rectangular",
-      "item": "resim",
-      "adj1": "renkli",
-      "adj2": "dikdortgen",
-    },
-    {
-      "label": "picture_colored_square",
-      "item": "resim",
-      "adj1": "renkli",
-      "adj2": "kare",
-    },
-    {
-      "label": "sign_circular_green",
-      "item": "trafik levhasi",
-      "adj1": "yuvarlak",
-      "adj2": "yesil",
-    },
-    {
-      "label": "sign_circular_orange",
-      "item": "trafik levhasi",
-      "adj1": "yuvarlak",
-      "adj2": "turuncu",
-    },
-    {
-      "label": "sign_triangular_green",
-      "item": "trafik levhasi",
-      "adj1": "ucgen",
-      "adj2": "yesil",
-    },
-    {
-      "label": "sign_triangular_orange",
-      "item": "trafik levhasi",
-      "adj1": "yuvarlak",
-      "adj2": "turuncu",
-    }
-]);
-
-  function makeTargetStim(i) {
-    console.log(items_target.length);
-    //get item
-    var item = items_target[i];
-    var item_id = item.item[0];
-    var object_label = item.label;
-      
-      return {
-	  "item": item_id,
-    "label": object_label
-    }
-  }
-  
+function init() {  
   exp.trials = [];
   exp.catch_trials = [];
   exp.condition = {}; //can randomize between subject conditions here

@@ -88,12 +88,22 @@ function make_slides(f) {
 	    this.stim = stim;
 	    console.log(this.stim);
       //var contextsentence = "Which description of this object sounds more natural?";
-      var contextsentence = "Bu sifat ne kadar öznel? ";
-      var adjective = "<big><b>"+this.stim.adj_tr+ "</b></big>";
-      // var adjquestion = 'Bu sıfat ne kadar öznel: "' + this.stim.adj_tr + '"?'
-	    $("#contextsentence").html(contextsentence);
-      $("#adjective").html(adjective);
-      $("#adjquestion").html(adjquestion);
+
+      var obj = this.stim.object
+
+      var sentence = "Ayşe: Bu " + this.stim.object_tr + " " + this.stim.adj_tr + "." + "<br>" + "Ahmet: Bu " + this.stim.object_tr + " " + this.stim.adj_tr + " değil.";
+
+
+      // if (obj[obj.length-1] == "s") 
+      //   var sentence = "Mary: Those " + this.stim.object + " are " + this.stim.adj + "." + "<br>" +"Bob: Those " + this.stim.object + " are not " + this.stim.adj + ".";
+      // else
+      //   var sentence = "Mary: That " + this.stim.object + " is " + this.stim.adj + "." + "<br>" +"Bob: That " + this.stim.object + " is not " + this.stim.adj + ".";
+
+      //var adjective = "<big><b>"+this.stim.adj+ "</b></big>";
+      //var adjquestion = 'How subjective is the adjective "' + this.stim.adj + '"?'
+	    $("#dialogue").html(sentence);
+      //$("#adjective").html(adjective);
+      //$("#adjquestion").html(adjquestion);
 	},
 
     button : function() {
@@ -118,7 +128,6 @@ function make_slides(f) {
           "label": this.stim.label,
           "object": this.stim.object,
           "adj": this.stim.adj,
-          "adj_tr": this.stim.adj_tr,
           "rt" : Date.now() - _s.trial_start,
           "response" : [exp.sliderPost]
         });

@@ -108,8 +108,7 @@ textarea {
 }
 
 .slider {
-	/* default is 500 */
-	width: 350; 
+	width: 400;
 	margin: 10px;
 }
 

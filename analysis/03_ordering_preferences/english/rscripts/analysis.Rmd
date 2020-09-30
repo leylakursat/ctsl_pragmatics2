@@ -37,15 +37,17 @@ df = df %>%
   mutate(right_end = str_replace(right_end,"black and white","black-and-white")) %>%
   mutate(left_end = str_replace(left_end,"black and white","black-and-white")) %>%
   mutate(first_pos = word(right_end, 1)) %>%
-  mutate(second_pos = word(right_end, 2))
+  mutate(second_pos = word(right_end, 2)) %>%
+  mutate(response_first_pos= response) %>%
+  mutate(response_second_pos = 1-response)
 ```
 
 ```{r preferenece, echo=FALSE}
 d = df %>%
-  group_by(first_pos) %>%
-  summarise(Mean=mean(response),CILow=ci.low(response),CIHigh=ci.high(response),count=n()) %>%
-  ungroup() %>%
-  mutate(YMin=Mean-CILow,YMax=Mean+CIHigh) 
+  group_by(label,first_pos,second_pos) %>%
+  summarise(Mean_first=mean(response_first_pos), Mean_second=mean(response_second_pos))
+
+d_long = gather(d,Mean_type,value,Mean_first:Mean_second)
 
 ggplot(d,(aes(x=reorder(first_pos, -Mean),y=Mean))) +
   geom_bar(stat = "identity") +
@@ -85,8 +87,8 @@ ggsave(file="../graphs/disagreement-naturalness.pdf")
 
 ```{r subjectivity_score, echo=FALSE}
 dd = df %>%
-  group_by(label,adj1,adj2,object,first_pos) %>%
-  summarise(Mean=mean(response)) %>%
+  group_by(label,first_pos) %>%
+  summarise(Mean=mean(response)) #%>%
   mutate(second_pos = ifelse(first_pos==as.character(adj1),as.character(adj2),ifelse(first_pos==as.character(adj2),as.character(adj1),NA))) %>%
   mutate(order=paste(first_pos,second_pos,object,sep = " "))
 
