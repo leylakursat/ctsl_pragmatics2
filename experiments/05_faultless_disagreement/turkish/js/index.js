@@ -91,8 +91,7 @@ function make_slides(f) {
 
       var obj = this.stim.object
 
-      var sentence = "Ayşe: Bu " + this.stim.object_tr + " " + this.stim.adj_tr + "." + "<br>" + "Ahmet: Bu " + this.stim.object_tr + " " + this.stim.adj_tr + " değil.";
-
+      var sentence = "Ayşe: O " + this.stim.object_tr + " " + this.stim.adj_tr + "." + "<br>" + "Ahmet: O " + this.stim.object_tr + " " + this.stim.adj_tr + " değil.";
 
       // if (obj[obj.length-1] == "s") 
       //   var sentence = "Mary: Those " + this.stim.object + " are " + this.stim.adj + "." + "<br>" +"Bob: Those " + this.stim.object + " are not " + this.stim.adj + ".";
