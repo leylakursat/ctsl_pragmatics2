@@ -145,7 +145,7 @@ ggplot(ds,(aes(x=subjectivity_difference,y=preference,color=object))) +
     geom_point(size=2)+
     theme(axis.text.x = element_text(angle = 60, hjust=1)) +
     geom_text(size=2,aes(label=order),hjust=0, vjust=0) +
-    geom_smooth(method=lm,se=FALSE) +
+    #geom_smooth(method=lm,se=FALSE) +
     xlab("subjectivity difference") +
     ylab("mean naturalness score") +
     theme(legend.position = "none")

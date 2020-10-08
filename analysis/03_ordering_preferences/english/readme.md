@@ -29,9 +29,6 @@ Pragmatics in CTSL - Ordering Preferences (ENGLISH)
     ## Saving 7 x 5 in image
     ## `geom_smooth()` using formula 'y ~ x'
 
-    ## `geom_smooth()` using formula 'y ~ x'
-
 ![](analysis_files/figure-gfm/subjectivity_score-1.png)<!-- -->
 
     ## Saving 7 x 5 in image
-    ## `geom_smooth()` using formula 'y ~ x'
