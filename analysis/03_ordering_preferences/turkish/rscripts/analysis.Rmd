@@ -1,5 +1,5 @@
 ---
-title: "Pragmatics in CTSL - Ordering Preferences (ENGLISH)"
+title: "Pragmatics in CTSL - Ordering Preferences (TURKISH)"
 output: rmarkdown::github_document
 #output:
   #html_document: default
@@ -19,8 +19,8 @@ theme_set(theme_bw())
 palette = wes_palette("Zissou1")
 
 # load data and format
-df = read.csv("../data/ordering-trials.csv", header = TRUE) %>%
-  filter(utterance != "bot_check" )
+df = read.csv("../data/turkish-ordering-trials.csv", header = TRUE) %>%
+  filter(trial_type != "bot_check" )
 
 df$response = gsub("\\[","",df$response)
 df$response = gsub("\\]","",df$response)
@@ -87,7 +87,7 @@ ggsave(file="../graphs/adj_first_pos.pdf",width=8,height=4)
 
 ```{r subjectivity, echo=FALSE}
 # load subjectivity and faultless disagreement agv dataset
-load("../../../04_subjectivity/english/data/subjectivity_and_disagreement.Rda")
+load("../../../04_subjectivity/turkish/data/subjectivity_and_disagreement.Rda")
 subjectivity = d_wide
 
 # merge and format
@@ -145,11 +145,10 @@ ggplot(ds,(aes(x=subjectivity_difference,y=preference,color=object))) +
     geom_point(size=2)+
     theme(axis.text.x = element_text(angle = 60, hjust=1)) +
     geom_text(size=2,aes(label=order),hjust=0, vjust=0) +
-    geom_smooth(method=lm,se=FALSE) +
+    #geom_smooth(method=lm,se=FALSE) +
     xlab("subjectivity difference") +
     ylab("mean naturalness score") +
     theme(legend.position = "none")
-
 
 ggsave(file="../graphs/subjectivity-difference.pdf")
 ```

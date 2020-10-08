@@ -1,5 +1,7 @@
-Pragmatics in CTSL - Ordering Preferences (ENGLISH)
+Pragmatics in CTSL - Ordering Preferences (TURKISH)
 ================
+
+    ## `summarise()` regrouping output by 'label', 'first_pos' (override with `.groups` argument)
 
     ## `summarise()` ungrouping output (override with `.groups` argument)
 
@@ -18,10 +20,15 @@ Pragmatics in CTSL - Ordering Preferences (ENGLISH)
     ## Saving 7 x 5 in image
     ## `geom_smooth()` using formula 'y ~ x'
 
-    ## `summarise()` regrouping output by 'label', 'adj1', 'adj2', 'object' (override with `.groups` argument)
+    ## Adding missing grouping variables: `adj_noun`
 
-    ## Warning: Removed 4 rows containing missing values (geom_point).
+    ## `geom_smooth()` using formula 'y ~ x'
 
-    ## Warning: Removed 4 rows containing missing values (geom_text).
+![](analysis_files/figure-gfm/subjectivity-3.png)<!-- -->
+
+    ## Saving 7 x 5 in image
+    ## `geom_smooth()` using formula 'y ~ x'
 
 ![](analysis_files/figure-gfm/subjectivity_score-1.png)<!-- -->
+
+    ## Saving 7 x 5 in image
